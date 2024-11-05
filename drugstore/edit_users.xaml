@@ -1,0 +1,97 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:drugstore"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit" x:Class="drugstore.edit_users"
+        mc:Ignorable="d"
+        Title="Редактировать" Height="500" Width="800" Icon="/images/logo.png">
+    <Window.Resources>
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle Margin="2" StrokeDashArray="1 2" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" SnapsToDevicePixels="true" StrokeThickness="1"/>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
+        <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
+        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
+        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+        <Style x:Key="ButtonStyle1" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="Padding" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="border" CornerRadius="10" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsDefaulted" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.MouseOver.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Rectangle HorizontalAlignment="Left" Height="70" VerticalAlignment="Top" Width="797" Fill="#FFD9FDF9" Margin="3,0,0,0"/>
+        <Image HorizontalAlignment="Left" Height="60" Margin="3,5,0,0" VerticalAlignment="Top" Width="60" Source="/images/logo.png"/>
+        <TextBlock HorizontalAlignment="Left" Margin="217,17,0,0" TextWrapping="Wrap" Text="Изменить данные о клиенте" VerticalAlignment="Top" FontFamily="Candara" FontSize="30" Width="369"/>
+        <Button Style="{DynamicResource ButtonStyle1}" x:Name="btn_back" Content="X" HorizontalAlignment="Left" Margin="723,17,0,0" VerticalAlignment="Top" Height="35" Width="35" FontFamily="Candara" FontSize="20" Background="#FFA5FFD6" BorderBrush="{x:Null}" Click="btn_back_Click"/>
+
+        <TextBox x:Name="tb_surname" Width="160" VerticalAlignment="Top" Text="" TextWrapping="Wrap" Margin="209,101,0,0" Height="30" HorizontalAlignment="Left" FontSize="16" FontFamily="Candara" BorderBrush="#FF047A65" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <TextBlock VerticalAlignment="Top" Text="Фамилия:" TextWrapping="Wrap" Margin="92,101,0,0" HorizontalAlignment="Left" FontSize="24" FontFamily="Candara" Foreground="Black"/>
+        <TextBox x:Name="tb_name" Width="160" VerticalAlignment="Top" Text="" TextWrapping="Wrap" Margin="209,162,0,0" Height="30" HorizontalAlignment="Left" FontSize="16" FontFamily="Candara" BorderBrush="#FF047A65" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <TextBlock VerticalAlignment="Top" Text="Имя:" TextWrapping="Wrap" Margin="144,163,0,0" HorizontalAlignment="Left" FontSize="24" FontFamily="Candara" Foreground="Black"/>
+        <TextBox x:Name="tb_fathername" Width="160" VerticalAlignment="Center" Text="" TextWrapping="Wrap" Margin="209,0,0,0" Height="30" HorizontalAlignment="Left" FontSize="16" FontFamily="Candara" BorderBrush="#FF047A65" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <TextBlock VerticalAlignment="Center" Text="Отчество:" TextWrapping="Wrap" Margin="92,0,0,0" HorizontalAlignment="Left" FontSize="24" FontFamily="Candara" Foreground="Black"/>
+        <xctk:MaskedTextBox x:Name="tb_phone" Mask="+7 (000) 000-00-00" HorizontalAlignment="Left" Margin="209,295,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="160" Height="30" FontFamily="Candara" FontSize="16" BorderBrush="#FF047A65" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <TextBlock HorizontalAlignment="Left" Margin="99,296,0,0" TextWrapping="Wrap" Text="Телефон:" VerticalAlignment="Top" Foreground="Black" FontFamily="Candara" FontSize="24"/>
+        <TextBlock HorizontalAlignment="Left" Margin="28,361,0,0" TextWrapping="Wrap" Text="Дата рождения:" VerticalAlignment="Top" Foreground="Black" FontFamily="Candara" FontSize="24"/>
+        <DatePicker x:Name="dp_birth" HorizontalAlignment="Left" Margin="209,361,0,0" VerticalAlignment="Top" Width="160" Height="30" FontFamily="Candara" FontSize="16" BorderBrush="#FF047A65" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <TextBox x:Name="tb_login" HorizontalAlignment="Left" Margin="612,293,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="160" Height="30" FontFamily="Candara" FontSize="16" VerticalContentAlignment="Center" BorderBrush="#FF047A65" HorizontalContentAlignment="Center"/>
+        <TextBlock HorizontalAlignment="Left" Margin="532,293,0,0" TextWrapping="Wrap" Text="Логин:" VerticalAlignment="Top" Foreground="Black" FontFamily="Candara" FontSize="24"/>
+        <TextBox x:Name="tb_password" HorizontalAlignment="Left" Margin="612,354,0,0" VerticalAlignment="Top" Width="160" Height="30" FontFamily="Candara" FontSize="16" VerticalContentAlignment="Center" BorderBrush="#FF047A65" HorizontalContentAlignment="Center"/>
+        <TextBlock HorizontalAlignment="Left" Margin="518,353,0,0" TextWrapping="Wrap" Text="Пароль:" VerticalAlignment="Top" Foreground="Black" FontFamily="Candara" FontSize="24"/>
+        <Button Style="{DynamicResource ButtonStyle1}" x:Name="btn_save" Content="Сохранить" HorizontalAlignment="Left" Margin="474,420,0,0" VerticalAlignment="Top" Height="40" Width="218" FontFamily="Candara" FontSize="22" Background="#FFA5FFD6" BorderBrush="{x:Null}" Click="btn_save_Click"/>
+        <TextBox x:Name="tb_card_number" Width="160" VerticalAlignment="Top" VerticalContentAlignment="Center" Text="" TextWrapping="Wrap" Margin="611,103,0,0" Height="30" HorizontalAlignment="Left" FontSize="16" FontFamily="Candara" BorderBrush="#FF047A65" IsEnabled="False" HorizontalContentAlignment="Center"/>
+        <TextBlock VerticalAlignment="Top" Text="Номер карты:" TextWrapping="Wrap" Margin="455,101,0,0" HorizontalAlignment="Left" FontSize="24" FontFamily="Candara" Foreground="Black"/>
+        <TextBox x:Name="tb_bonuses" Width="160" VerticalAlignment="Top" IsEnabled="False" VerticalContentAlignment="Center" Text="" TextWrapping="Wrap" Margin="611,164,0,0" Height="30" HorizontalAlignment="Left" FontSize="16" FontFamily="Candara" BorderBrush="#FF047A65" HorizontalContentAlignment="Center"/>
+        <TextBlock VerticalAlignment="Top" Text="Доступно бонусов:" TextWrapping="Wrap" Margin="403,163,0,0" HorizontalAlignment="Left" FontSize="24" FontFamily="Candara" Foreground="Black"/>
+        <ComboBox x:Name="cb_role" Width="160" VerticalAlignment="Top" VerticalContentAlignment="Center" Text="" Margin="611,229,0,0" Height="30" HorizontalAlignment="Left" FontSize="16" FontFamily="Candara" BorderBrush="#FF047A65"/>
+        <TextBlock VerticalAlignment="Center" Text="Роль:" TextWrapping="Wrap" Margin="544,0,0,0" HorizontalAlignment="Left" FontSize="24" FontFamily="Candara" Foreground="Black"/>
+        <Button Style="{DynamicResource ButtonStyle1}" x:Name="btn_delete" Content="Удалить пользователя" HorizontalAlignment="Left" Margin="144,420,0,0" VerticalAlignment="Top" Height="40" Width="240" FontFamily="Candara" FontSize="22" Background="#FFA5FFD6" BorderBrush="{x:Null}" Click="btn_delete_Click"/>
+
+    </Grid>
+</Window>

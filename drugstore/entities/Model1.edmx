@@ -1,0 +1,612 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище user95_dbModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="kurs_05_02_basket">
+          <Key>
+            <PropertyRef Name="id_basket" />
+          </Key>
+          <Property Name="id_basket" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id_cure" Type="int" />
+          <Property Name="id_user" Type="int" />
+          <Property Name="cure_quantity" Type="int" />
+          <Property Name="id_order" Type="int" />
+        </EntityType>
+        <EntityType Name="kurs_05_02_cure">
+          <Key>
+            <PropertyRef Name="id_cure" />
+          </Key>
+          <Property Name="id_cure" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar(max)" />
+          <Property Name="price" Type="int" />
+          <Property Name="id_category" Type="int" />
+          <Property Name="id_release_form" Type="int" />
+          <Property Name="shelf_life" Type="date" />
+          <Property Name="volume" Type="varchar(max)" />
+          <Property Name="id_manufacturer" Type="int" />
+          <Property Name="in_stock" Type="varchar(max)" />
+          <Property Name="prescription" Type="bit" />
+          <Property Name="image" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="kurs_05_02_cure_category">
+          <Key>
+            <PropertyRef Name="id_category" />
+          </Key>
+          <Property Name="id_category" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="kurs_05_02_manufacturer">
+          <Key>
+            <PropertyRef Name="id_manufacturer" />
+          </Key>
+          <Property Name="id_manufacturer" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="kurs_05_02_order">
+          <Key>
+            <PropertyRef Name="id_order" />
+          </Key>
+          <Property Name="id_order" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="total_sum" Type="int" />
+          <Property Name="bonuses_for_order" Type="int" />
+          <Property Name="address" Type="varchar(max)" />
+          <Property Name="id_payment_method" Type="int" />
+          <Property Name="order_code" Type="varchar" MaxLength="8" />
+          <Property Name="finished" Type="bit" />
+        </EntityType>
+        <EntityType Name="kurs_05_02_payment_method">
+          <Key>
+            <PropertyRef Name="id_method" />
+          </Key>
+          <Property Name="id_method" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="kurs_05_02_release_form">
+          <Key>
+            <PropertyRef Name="id_form" />
+          </Key>
+          <Property Name="id_form" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="kurs_05_02_user">
+          <Key>
+            <PropertyRef Name="id_user" />
+          </Key>
+          <Property Name="id_user" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar(max)" />
+          <Property Name="surname" Type="varchar(max)" />
+          <Property Name="fathername" Type="varchar(max)" />
+          <Property Name="date_of_birth" Type="date" />
+          <Property Name="phone" Type="varchar(max)" />
+          <Property Name="card_number" Type="varchar(max)" />
+          <Property Name="card_bonuses" Type="int" />
+          <Property Name="id_role" Type="int" />
+          <Property Name="login" Type="varchar(max)" />
+          <Property Name="password" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="kusr_05_02_role">
+          <Key>
+            <PropertyRef Name="id_role" />
+          </Key>
+          <Property Name="id_role" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar(max)" />
+        </EntityType>
+        <Association Name="FK_kurs_05_02_basket_kurs_05_02_cure">
+          <End Role="kurs_05_02_cure" Type="Self.kurs_05_02_cure" Multiplicity="0..1" />
+          <End Role="kurs_05_02_basket" Type="Self.kurs_05_02_basket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="kurs_05_02_cure">
+              <PropertyRef Name="id_cure" />
+            </Principal>
+            <Dependent Role="kurs_05_02_basket">
+              <PropertyRef Name="id_cure" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_kurs_05_02_basket_kurs_05_02_order">
+          <End Role="kurs_05_02_order" Type="Self.kurs_05_02_order" Multiplicity="0..1" />
+          <End Role="kurs_05_02_basket" Type="Self.kurs_05_02_basket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="kurs_05_02_order">
+              <PropertyRef Name="id_order" />
+            </Principal>
+            <Dependent Role="kurs_05_02_basket">
+              <PropertyRef Name="id_order" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_kurs_05_02_basket_kurs_05_02_user">
+          <End Role="kurs_05_02_user" Type="Self.kurs_05_02_user" Multiplicity="0..1" />
+          <End Role="kurs_05_02_basket" Type="Self.kurs_05_02_basket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="kurs_05_02_user">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="kurs_05_02_basket">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_kurs_05_02_cure_kurs_05_02_cure_category">
+          <End Role="kurs_05_02_cure_category" Type="Self.kurs_05_02_cure_category" Multiplicity="0..1" />
+          <End Role="kurs_05_02_cure" Type="Self.kurs_05_02_cure" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="kurs_05_02_cure_category">
+              <PropertyRef Name="id_category" />
+            </Principal>
+            <Dependent Role="kurs_05_02_cure">
+              <PropertyRef Name="id_category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_kurs_05_02_cure_kurs_05_02_manufacturer">
+          <End Role="kurs_05_02_manufacturer" Type="Self.kurs_05_02_manufacturer" Multiplicity="0..1" />
+          <End Role="kurs_05_02_cure" Type="Self.kurs_05_02_cure" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="kurs_05_02_manufacturer">
+              <PropertyRef Name="id_manufacturer" />
+            </Principal>
+            <Dependent Role="kurs_05_02_cure">
+              <PropertyRef Name="id_manufacturer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_kurs_05_02_cure_kurs_05_02_release_form">
+          <End Role="kurs_05_02_release_form" Type="Self.kurs_05_02_release_form" Multiplicity="0..1" />
+          <End Role="kurs_05_02_cure" Type="Self.kurs_05_02_cure" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="kurs_05_02_release_form">
+              <PropertyRef Name="id_form" />
+            </Principal>
+            <Dependent Role="kurs_05_02_cure">
+              <PropertyRef Name="id_release_form" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_kurs_05_02_order_kurs_05_02_payment_method">
+          <End Role="kurs_05_02_payment_method" Type="Self.kurs_05_02_payment_method" Multiplicity="0..1" />
+          <End Role="kurs_05_02_order" Type="Self.kurs_05_02_order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="kurs_05_02_payment_method">
+              <PropertyRef Name="id_method" />
+            </Principal>
+            <Dependent Role="kurs_05_02_order">
+              <PropertyRef Name="id_payment_method" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_kurs_05_02_user_kusr_05_02_role">
+          <End Role="kusr_05_02_role" Type="Self.kusr_05_02_role" Multiplicity="0..1" />
+          <End Role="kurs_05_02_user" Type="Self.kurs_05_02_user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="kusr_05_02_role">
+              <PropertyRef Name="id_role" />
+            </Principal>
+            <Dependent Role="kurs_05_02_user">
+              <PropertyRef Name="id_role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище user95_dbModelContainer">
+          <EntitySet Name="kurs_05_02_basket" EntityType="Self.kurs_05_02_basket" Schema="dbo" Table="kurs_05.02_basket" store:Type="Tables" />
+          <EntitySet Name="kurs_05_02_cure" EntityType="Self.kurs_05_02_cure" Schema="dbo" Table="kurs_05.02_cure" store:Type="Tables" />
+          <EntitySet Name="kurs_05_02_cure_category" EntityType="Self.kurs_05_02_cure_category" Schema="dbo" Table="kurs_05.02_cure_category" store:Type="Tables" />
+          <EntitySet Name="kurs_05_02_manufacturer" EntityType="Self.kurs_05_02_manufacturer" Schema="dbo" Table="kurs_05.02_manufacturer" store:Type="Tables" />
+          <EntitySet Name="kurs_05_02_order" EntityType="Self.kurs_05_02_order" Schema="dbo" Table="kurs_05.02_order" store:Type="Tables" />
+          <EntitySet Name="kurs_05_02_payment_method" EntityType="Self.kurs_05_02_payment_method" Schema="dbo" Table="kurs_05.02_payment_method" store:Type="Tables" />
+          <EntitySet Name="kurs_05_02_release_form" EntityType="Self.kurs_05_02_release_form" Schema="dbo" Table="kurs_05.02_release_form" store:Type="Tables" />
+          <EntitySet Name="kurs_05_02_user" EntityType="Self.kurs_05_02_user" Schema="dbo" Table="kurs_05.02_user" store:Type="Tables" />
+          <EntitySet Name="kusr_05_02_role" EntityType="Self.kusr_05_02_role" Schema="dbo" Table="kusr_05.02_role" store:Type="Tables" />
+          <AssociationSet Name="FK_kurs_05_02_basket_kurs_05_02_cure" Association="Self.FK_kurs_05_02_basket_kurs_05_02_cure">
+            <End Role="kurs_05_02_cure" EntitySet="kurs_05_02_cure" />
+            <End Role="kurs_05_02_basket" EntitySet="kurs_05_02_basket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_kurs_05_02_basket_kurs_05_02_order" Association="Self.FK_kurs_05_02_basket_kurs_05_02_order">
+            <End Role="kurs_05_02_order" EntitySet="kurs_05_02_order" />
+            <End Role="kurs_05_02_basket" EntitySet="kurs_05_02_basket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_kurs_05_02_basket_kurs_05_02_user" Association="Self.FK_kurs_05_02_basket_kurs_05_02_user">
+            <End Role="kurs_05_02_user" EntitySet="kurs_05_02_user" />
+            <End Role="kurs_05_02_basket" EntitySet="kurs_05_02_basket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_kurs_05_02_cure_kurs_05_02_cure_category" Association="Self.FK_kurs_05_02_cure_kurs_05_02_cure_category">
+            <End Role="kurs_05_02_cure_category" EntitySet="kurs_05_02_cure_category" />
+            <End Role="kurs_05_02_cure" EntitySet="kurs_05_02_cure" />
+          </AssociationSet>
+          <AssociationSet Name="FK_kurs_05_02_cure_kurs_05_02_manufacturer" Association="Self.FK_kurs_05_02_cure_kurs_05_02_manufacturer">
+            <End Role="kurs_05_02_manufacturer" EntitySet="kurs_05_02_manufacturer" />
+            <End Role="kurs_05_02_cure" EntitySet="kurs_05_02_cure" />
+          </AssociationSet>
+          <AssociationSet Name="FK_kurs_05_02_cure_kurs_05_02_release_form" Association="Self.FK_kurs_05_02_cure_kurs_05_02_release_form">
+            <End Role="kurs_05_02_release_form" EntitySet="kurs_05_02_release_form" />
+            <End Role="kurs_05_02_cure" EntitySet="kurs_05_02_cure" />
+          </AssociationSet>
+          <AssociationSet Name="FK_kurs_05_02_order_kurs_05_02_payment_method" Association="Self.FK_kurs_05_02_order_kurs_05_02_payment_method">
+            <End Role="kurs_05_02_payment_method" EntitySet="kurs_05_02_payment_method" />
+            <End Role="kurs_05_02_order" EntitySet="kurs_05_02_order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_kurs_05_02_user_kusr_05_02_role" Association="Self.FK_kurs_05_02_user_kusr_05_02_role">
+            <End Role="kusr_05_02_role" EntitySet="kusr_05_02_role" />
+            <End Role="kurs_05_02_user" EntitySet="kurs_05_02_user" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="user95_dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="kurs_05_02_basket">
+          <Key>
+            <PropertyRef Name="id_basket" />
+          </Key>
+          <Property Name="id_basket" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_cure" Type="Int32" />
+          <Property Name="id_user" Type="Int32" />
+          <Property Name="cure_quantity" Type="Int32" />
+          <Property Name="id_order" Type="Int32" />
+          <NavigationProperty Name="kurs_05_02_cure" Relationship="Self.FK_kurs_05_02_basket_kurs_05_02_cure" FromRole="kurs_05_02_basket" ToRole="kurs_05_02_cure" />
+          <NavigationProperty Name="kurs_05_02_order" Relationship="Self.FK_kurs_05_02_basket_kurs_05_02_order" FromRole="kurs_05_02_basket" ToRole="kurs_05_02_order" />
+          <NavigationProperty Name="kurs_05_02_user" Relationship="Self.FK_kurs_05_02_basket_kurs_05_02_user" FromRole="kurs_05_02_basket" ToRole="kurs_05_02_user" />
+        </EntityType>
+        <EntityType Name="kurs_05_02_cure">
+          <Key>
+            <PropertyRef Name="id_cure" />
+          </Key>
+          <Property Name="id_cure" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="price" Type="Int32" />
+          <Property Name="id_category" Type="Int32" />
+          <Property Name="id_release_form" Type="Int32" />
+          <Property Name="shelf_life" Type="DateTime" Precision="0" />
+          <Property Name="volume" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="id_manufacturer" Type="Int32" />
+          <Property Name="in_stock" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="prescription" Type="Boolean" />
+          <Property Name="image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="kurs_05_02_basket" Relationship="Self.FK_kurs_05_02_basket_kurs_05_02_cure" FromRole="kurs_05_02_cure" ToRole="kurs_05_02_basket" />
+          <NavigationProperty Name="kurs_05_02_cure_category" Relationship="Self.FK_kurs_05_02_cure_kurs_05_02_cure_category" FromRole="kurs_05_02_cure" ToRole="kurs_05_02_cure_category" />
+          <NavigationProperty Name="kurs_05_02_manufacturer" Relationship="Self.FK_kurs_05_02_cure_kurs_05_02_manufacturer" FromRole="kurs_05_02_cure" ToRole="kurs_05_02_manufacturer" />
+          <NavigationProperty Name="kurs_05_02_release_form" Relationship="Self.FK_kurs_05_02_cure_kurs_05_02_release_form" FromRole="kurs_05_02_cure" ToRole="kurs_05_02_release_form" />
+        </EntityType>
+        <EntityType Name="kurs_05_02_cure_category">
+          <Key>
+            <PropertyRef Name="id_category" />
+          </Key>
+          <Property Name="id_category" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="kurs_05_02_cure" Relationship="Self.FK_kurs_05_02_cure_kurs_05_02_cure_category" FromRole="kurs_05_02_cure_category" ToRole="kurs_05_02_cure" />
+        </EntityType>
+        <EntityType Name="kurs_05_02_manufacturer">
+          <Key>
+            <PropertyRef Name="id_manufacturer" />
+          </Key>
+          <Property Name="id_manufacturer" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="kurs_05_02_cure" Relationship="Self.FK_kurs_05_02_cure_kurs_05_02_manufacturer" FromRole="kurs_05_02_manufacturer" ToRole="kurs_05_02_cure" />
+        </EntityType>
+        <EntityType Name="kurs_05_02_order">
+          <Key>
+            <PropertyRef Name="id_order" />
+          </Key>
+          <Property Name="id_order" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="total_sum" Type="Int32" />
+          <Property Name="bonuses_for_order" Type="Int32" />
+          <Property Name="address" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="id_payment_method" Type="Int32" />
+          <Property Name="order_code" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="finished" Type="Boolean" />
+          <NavigationProperty Name="kurs_05_02_basket" Relationship="Self.FK_kurs_05_02_basket_kurs_05_02_order" FromRole="kurs_05_02_order" ToRole="kurs_05_02_basket" />
+          <NavigationProperty Name="kurs_05_02_payment_method" Relationship="Self.FK_kurs_05_02_order_kurs_05_02_payment_method" FromRole="kurs_05_02_order" ToRole="kurs_05_02_payment_method" />
+        </EntityType>
+        <EntityType Name="kurs_05_02_payment_method">
+          <Key>
+            <PropertyRef Name="id_method" />
+          </Key>
+          <Property Name="id_method" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="kurs_05_02_order" Relationship="Self.FK_kurs_05_02_order_kurs_05_02_payment_method" FromRole="kurs_05_02_payment_method" ToRole="kurs_05_02_order" />
+        </EntityType>
+        <EntityType Name="kurs_05_02_release_form">
+          <Key>
+            <PropertyRef Name="id_form" />
+          </Key>
+          <Property Name="id_form" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="kurs_05_02_cure" Relationship="Self.FK_kurs_05_02_cure_kurs_05_02_release_form" FromRole="kurs_05_02_release_form" ToRole="kurs_05_02_cure" />
+        </EntityType>
+        <EntityType Name="kurs_05_02_user">
+          <Key>
+            <PropertyRef Name="id_user" />
+          </Key>
+          <Property Name="id_user" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="surname" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="fathername" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="date_of_birth" Type="DateTime" Precision="0" />
+          <Property Name="phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="card_number" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="card_bonuses" Type="Int32" />
+          <Property Name="id_role" Type="Int32" />
+          <Property Name="login" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="kurs_05_02_basket" Relationship="Self.FK_kurs_05_02_basket_kurs_05_02_user" FromRole="kurs_05_02_user" ToRole="kurs_05_02_basket" />
+          <NavigationProperty Name="kusr_05_02_role" Relationship="Self.FK_kurs_05_02_user_kusr_05_02_role" FromRole="kurs_05_02_user" ToRole="kusr_05_02_role" />
+        </EntityType>
+        <EntityType Name="kusr_05_02_role">
+          <Key>
+            <PropertyRef Name="id_role" />
+          </Key>
+          <Property Name="id_role" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="kurs_05_02_user" Relationship="Self.FK_kurs_05_02_user_kusr_05_02_role" FromRole="kusr_05_02_role" ToRole="kurs_05_02_user" />
+        </EntityType>
+        <Association Name="FK_kurs_05_02_basket_kurs_05_02_cure">
+          <End Role="kurs_05_02_cure" Type="Self.kurs_05_02_cure" Multiplicity="0..1" />
+          <End Role="kurs_05_02_basket" Type="Self.kurs_05_02_basket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="kurs_05_02_cure">
+              <PropertyRef Name="id_cure" />
+            </Principal>
+            <Dependent Role="kurs_05_02_basket">
+              <PropertyRef Name="id_cure" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_kurs_05_02_basket_kurs_05_02_order">
+          <End Role="kurs_05_02_order" Type="Self.kurs_05_02_order" Multiplicity="0..1" />
+          <End Role="kurs_05_02_basket" Type="Self.kurs_05_02_basket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="kurs_05_02_order">
+              <PropertyRef Name="id_order" />
+            </Principal>
+            <Dependent Role="kurs_05_02_basket">
+              <PropertyRef Name="id_order" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_kurs_05_02_basket_kurs_05_02_user">
+          <End Role="kurs_05_02_user" Type="Self.kurs_05_02_user" Multiplicity="0..1" />
+          <End Role="kurs_05_02_basket" Type="Self.kurs_05_02_basket" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="kurs_05_02_user">
+              <PropertyRef Name="id_user" />
+            </Principal>
+            <Dependent Role="kurs_05_02_basket">
+              <PropertyRef Name="id_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_kurs_05_02_cure_kurs_05_02_cure_category">
+          <End Role="kurs_05_02_cure_category" Type="Self.kurs_05_02_cure_category" Multiplicity="0..1" />
+          <End Role="kurs_05_02_cure" Type="Self.kurs_05_02_cure" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="kurs_05_02_cure_category">
+              <PropertyRef Name="id_category" />
+            </Principal>
+            <Dependent Role="kurs_05_02_cure">
+              <PropertyRef Name="id_category" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_kurs_05_02_cure_kurs_05_02_manufacturer">
+          <End Role="kurs_05_02_manufacturer" Type="Self.kurs_05_02_manufacturer" Multiplicity="0..1" />
+          <End Role="kurs_05_02_cure" Type="Self.kurs_05_02_cure" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="kurs_05_02_manufacturer">
+              <PropertyRef Name="id_manufacturer" />
+            </Principal>
+            <Dependent Role="kurs_05_02_cure">
+              <PropertyRef Name="id_manufacturer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_kurs_05_02_cure_kurs_05_02_release_form">
+          <End Role="kurs_05_02_release_form" Type="Self.kurs_05_02_release_form" Multiplicity="0..1" />
+          <End Role="kurs_05_02_cure" Type="Self.kurs_05_02_cure" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="kurs_05_02_release_form">
+              <PropertyRef Name="id_form" />
+            </Principal>
+            <Dependent Role="kurs_05_02_cure">
+              <PropertyRef Name="id_release_form" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_kurs_05_02_order_kurs_05_02_payment_method">
+          <End Role="kurs_05_02_payment_method" Type="Self.kurs_05_02_payment_method" Multiplicity="0..1" />
+          <End Role="kurs_05_02_order" Type="Self.kurs_05_02_order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="kurs_05_02_payment_method">
+              <PropertyRef Name="id_method" />
+            </Principal>
+            <Dependent Role="kurs_05_02_order">
+              <PropertyRef Name="id_payment_method" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_kurs_05_02_user_kusr_05_02_role">
+          <End Role="kusr_05_02_role" Type="Self.kusr_05_02_role" Multiplicity="0..1" />
+          <End Role="kurs_05_02_user" Type="Self.kurs_05_02_user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="kusr_05_02_role">
+              <PropertyRef Name="id_role" />
+            </Principal>
+            <Dependent Role="kurs_05_02_user">
+              <PropertyRef Name="id_role" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="user95_dbEntities11" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="kurs_05_02_basket" EntityType="Self.kurs_05_02_basket" />
+          <EntitySet Name="kurs_05_02_cure" EntityType="Self.kurs_05_02_cure" />
+          <EntitySet Name="kurs_05_02_cure_category" EntityType="Self.kurs_05_02_cure_category" />
+          <EntitySet Name="kurs_05_02_manufacturer" EntityType="Self.kurs_05_02_manufacturer" />
+          <EntitySet Name="kurs_05_02_order" EntityType="Self.kurs_05_02_order" />
+          <EntitySet Name="kurs_05_02_payment_method" EntityType="Self.kurs_05_02_payment_method" />
+          <EntitySet Name="kurs_05_02_release_form" EntityType="Self.kurs_05_02_release_form" />
+          <EntitySet Name="kurs_05_02_user" EntityType="Self.kurs_05_02_user" />
+          <EntitySet Name="kusr_05_02_role" EntityType="Self.kusr_05_02_role" />
+          <AssociationSet Name="FK_kurs_05_02_basket_kurs_05_02_cure" Association="Self.FK_kurs_05_02_basket_kurs_05_02_cure">
+            <End Role="kurs_05_02_cure" EntitySet="kurs_05_02_cure" />
+            <End Role="kurs_05_02_basket" EntitySet="kurs_05_02_basket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_kurs_05_02_basket_kurs_05_02_order" Association="Self.FK_kurs_05_02_basket_kurs_05_02_order">
+            <End Role="kurs_05_02_order" EntitySet="kurs_05_02_order" />
+            <End Role="kurs_05_02_basket" EntitySet="kurs_05_02_basket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_kurs_05_02_basket_kurs_05_02_user" Association="Self.FK_kurs_05_02_basket_kurs_05_02_user">
+            <End Role="kurs_05_02_user" EntitySet="kurs_05_02_user" />
+            <End Role="kurs_05_02_basket" EntitySet="kurs_05_02_basket" />
+          </AssociationSet>
+          <AssociationSet Name="FK_kurs_05_02_cure_kurs_05_02_cure_category" Association="Self.FK_kurs_05_02_cure_kurs_05_02_cure_category">
+            <End Role="kurs_05_02_cure_category" EntitySet="kurs_05_02_cure_category" />
+            <End Role="kurs_05_02_cure" EntitySet="kurs_05_02_cure" />
+          </AssociationSet>
+          <AssociationSet Name="FK_kurs_05_02_cure_kurs_05_02_manufacturer" Association="Self.FK_kurs_05_02_cure_kurs_05_02_manufacturer">
+            <End Role="kurs_05_02_manufacturer" EntitySet="kurs_05_02_manufacturer" />
+            <End Role="kurs_05_02_cure" EntitySet="kurs_05_02_cure" />
+          </AssociationSet>
+          <AssociationSet Name="FK_kurs_05_02_cure_kurs_05_02_release_form" Association="Self.FK_kurs_05_02_cure_kurs_05_02_release_form">
+            <End Role="kurs_05_02_release_form" EntitySet="kurs_05_02_release_form" />
+            <End Role="kurs_05_02_cure" EntitySet="kurs_05_02_cure" />
+          </AssociationSet>
+          <AssociationSet Name="FK_kurs_05_02_order_kurs_05_02_payment_method" Association="Self.FK_kurs_05_02_order_kurs_05_02_payment_method">
+            <End Role="kurs_05_02_payment_method" EntitySet="kurs_05_02_payment_method" />
+            <End Role="kurs_05_02_order" EntitySet="kurs_05_02_order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_kurs_05_02_user_kusr_05_02_role" Association="Self.FK_kurs_05_02_user_kusr_05_02_role">
+            <End Role="kusr_05_02_role" EntitySet="kusr_05_02_role" />
+            <End Role="kurs_05_02_user" EntitySet="kurs_05_02_user" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище user95_dbModelContainer" CdmEntityContainer="user95_dbEntities11">
+          <EntitySetMapping Name="kurs_05_02_basket">
+            <EntityTypeMapping TypeName="user95_dbModel.kurs_05_02_basket">
+              <MappingFragment StoreEntitySet="kurs_05_02_basket">
+                <ScalarProperty Name="id_basket" ColumnName="id_basket" />
+                <ScalarProperty Name="id_cure" ColumnName="id_cure" />
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+                <ScalarProperty Name="cure_quantity" ColumnName="cure_quantity" />
+                <ScalarProperty Name="id_order" ColumnName="id_order" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="kurs_05_02_cure">
+            <EntityTypeMapping TypeName="user95_dbModel.kurs_05_02_cure">
+              <MappingFragment StoreEntitySet="kurs_05_02_cure">
+                <ScalarProperty Name="id_cure" ColumnName="id_cure" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="id_category" ColumnName="id_category" />
+                <ScalarProperty Name="id_release_form" ColumnName="id_release_form" />
+                <ScalarProperty Name="shelf_life" ColumnName="shelf_life" />
+                <ScalarProperty Name="volume" ColumnName="volume" />
+                <ScalarProperty Name="id_manufacturer" ColumnName="id_manufacturer" />
+                <ScalarProperty Name="in_stock" ColumnName="in_stock" />
+                <ScalarProperty Name="prescription" ColumnName="prescription" />
+                <ScalarProperty Name="image" ColumnName="image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="kurs_05_02_cure_category">
+            <EntityTypeMapping TypeName="user95_dbModel.kurs_05_02_cure_category">
+              <MappingFragment StoreEntitySet="kurs_05_02_cure_category">
+                <ScalarProperty Name="id_category" ColumnName="id_category" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="kurs_05_02_manufacturer">
+            <EntityTypeMapping TypeName="user95_dbModel.kurs_05_02_manufacturer">
+              <MappingFragment StoreEntitySet="kurs_05_02_manufacturer">
+                <ScalarProperty Name="id_manufacturer" ColumnName="id_manufacturer" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="kurs_05_02_order">
+            <EntityTypeMapping TypeName="user95_dbModel.kurs_05_02_order">
+              <MappingFragment StoreEntitySet="kurs_05_02_order">
+                <ScalarProperty Name="id_order" ColumnName="id_order" />
+                <ScalarProperty Name="total_sum" ColumnName="total_sum" />
+                <ScalarProperty Name="bonuses_for_order" ColumnName="bonuses_for_order" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="id_payment_method" ColumnName="id_payment_method" />
+                <ScalarProperty Name="order_code" ColumnName="order_code" />
+                <ScalarProperty Name="finished" ColumnName="finished" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="kurs_05_02_payment_method">
+            <EntityTypeMapping TypeName="user95_dbModel.kurs_05_02_payment_method">
+              <MappingFragment StoreEntitySet="kurs_05_02_payment_method">
+                <ScalarProperty Name="id_method" ColumnName="id_method" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="kurs_05_02_release_form">
+            <EntityTypeMapping TypeName="user95_dbModel.kurs_05_02_release_form">
+              <MappingFragment StoreEntitySet="kurs_05_02_release_form">
+                <ScalarProperty Name="id_form" ColumnName="id_form" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="kurs_05_02_user">
+            <EntityTypeMapping TypeName="user95_dbModel.kurs_05_02_user">
+              <MappingFragment StoreEntitySet="kurs_05_02_user">
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="fathername" ColumnName="fathername" />
+                <ScalarProperty Name="date_of_birth" ColumnName="date_of_birth" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="card_number" ColumnName="card_number" />
+                <ScalarProperty Name="card_bonuses" ColumnName="card_bonuses" />
+                <ScalarProperty Name="id_role" ColumnName="id_role" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="password" ColumnName="password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="kusr_05_02_role">
+            <EntityTypeMapping TypeName="user95_dbModel.kusr_05_02_role">
+              <MappingFragment StoreEntitySet="kusr_05_02_role">
+                <ScalarProperty Name="id_role" ColumnName="id_role" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
