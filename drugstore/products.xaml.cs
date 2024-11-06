@@ -41,6 +41,14 @@ namespace drugstore
                 btn_add.Visibility = Visibility.Hidden;
                 var app = (App)Application.Current;
                 app.ButtonText = "В корзину";
+
+                var new_order = new kurs_05_02_order
+                {
+                    finished = false,
+                };
+                App.Context.kurs_05_02_order.Add(new_order);
+
+                App.id_order = App.Context.kurs_05_02_order.OrderByDescending(p => p.id_order).FirstOrDefault().id_order;
             }
 
         }
@@ -261,14 +269,6 @@ namespace drugstore
                         MessageBox.Show("К сожалению, товар закончился... Через пару дней обязательно будет в наличии!", "Уведомление");
                         return;
                     }
-
-                    var new_order = new kurs_05_02_order
-                    {
-                        finished = false,
-                    };
-                    App.Context.kurs_05_02_order.Add(new_order);
-
-                    App.id_order = App.Context.kurs_05_02_order.OrderByDescending(p => p.id_order).FirstOrDefault().id_order;
 
                     tbl_in_basket.Text = Convert.ToString(Convert.ToInt32(tbl_in_basket.Text) + 1);
 
