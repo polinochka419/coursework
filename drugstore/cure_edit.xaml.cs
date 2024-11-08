@@ -21,10 +21,12 @@ namespace drugstore
     /// </summary>
     public partial class cure_edit : Window
     {
+        int id = 0;
         public cure_edit(entities.kurs_05_02_cure edited_cure)
         {
             InitializeComponent();
 
+            id = edited_cure.id_cure;
             tbl_name.Text = edited_cure.name;
             tb_price.Text = edited_cure.price.ToString();
             cb_in_stock.Text = edited_cure.in_stock;
@@ -52,6 +54,7 @@ namespace drugstore
 
                     if (_mainImageData.Length == 0)
                     {
+                        
                         _mainImageData = File.ReadAllBytes("empty.png");
 
                     }
@@ -79,7 +82,11 @@ namespace drugstore
                 {
                     if (_mainImageData == null)
                     {
-                        _mainImageData = File.ReadAllBytes("empty.png");
+                        if (id != 0)
+                        {
+                            _mainImageData = App.Context.kurs_05_02_cure.FirstOrDefault(p => p.id_cure == id).image;
+                        }
+                        else _mainImageData = File.ReadAllBytes("empty.png");
 
                     }
 

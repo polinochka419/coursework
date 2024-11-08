@@ -106,12 +106,18 @@ namespace drugstore
 
         private void btn_delete_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
+            //try
+            //{
                 if (MessageBox.Show("Подтвердите удаление заказа", "Внимание",
                MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                 {
                     var deleted = App.Context.kurs_05_02_order.FirstOrDefault(p => p.id_order == id);
+                    var deleted_basket = App.Context.kurs_05_02_basket.Where(p => p.id_order == id);
+                    foreach ( var basket in deleted_basket )
+                {
+                        App.Context.kurs_05_02_basket.Remove(basket);
+                }
+
                     App.Context.kurs_05_02_order.Remove(deleted);
                     App.Context.SaveChanges();
                     MessageBox.Show("Заказ удалён.", "Уведомление");
@@ -120,11 +126,11 @@ namespace drugstore
                     back.Show();
                     this.Close();
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Что-то пошло не так...");
-            }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show(ex.Message, "Что-то пошло не так...");
+            //}
         }
     }
 }

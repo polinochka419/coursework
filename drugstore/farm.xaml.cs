@@ -37,6 +37,7 @@ namespace drugstore
 
         private void btn_to_cures_Click(object sender, RoutedEventArgs e)
         {
+            App.basket = new List<kurs_05_02_basket>();
             Window products = new products();
             products.Show();
             this.Close();
