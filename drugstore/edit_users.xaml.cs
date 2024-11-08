@@ -92,6 +92,11 @@ namespace drugstore
             if (MessageBox.Show("Подтвердите удаление пользователя.", "Внимание",
                MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
+                    var deleted_basket = App.Context.kurs_05_02_basket.Where(p => p.id_order == id);
+                    foreach (var basket in deleted_basket)
+                    {
+                        App.Context.kurs_05_02_basket.Remove(basket);
+                    }
                     var deleted = App.Context.kurs_05_02_user.FirstOrDefault(p => p.id_user == id);
                     App.Context.kurs_05_02_user.Remove(deleted);
                     App.Context.SaveChanges();

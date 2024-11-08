@@ -106,8 +106,8 @@ namespace drugstore
 
         private void btn_delete_Click(object sender, RoutedEventArgs e)
         {
-            //try
-            //{
+            try
+            {
                 if (MessageBox.Show("Подтвердите удаление заказа", "Внимание",
                MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
                 {
@@ -126,11 +126,11 @@ namespace drugstore
                     back.Show();
                     this.Close();
                 }
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show(ex.Message, "Что-то пошло не так...");
-            //}
         }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Что-то пошло не так...");
+            }
+}
     }
 }

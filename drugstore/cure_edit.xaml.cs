@@ -115,7 +115,12 @@ namespace drugstore
             if (MessageBox.Show("Подтвердите удаление товара", "Внимание",
                 MessageBoxButton.YesNo, MessageBoxImage.Warning) == MessageBoxResult.Yes)
             {
-                var edited = App.Context.kurs_05_02_cure.FirstOrDefault(p => p.name == tbl_name.Text);
+                var deleted_basket = App.Context.kurs_05_02_basket.Where(p => p.id_order == id);
+                foreach (var basket in deleted_basket)
+                {
+                    App.Context.kurs_05_02_basket.Remove(basket);
+                }
+                    var edited = App.Context.kurs_05_02_cure.FirstOrDefault(p => p.name == tbl_name.Text);
                 App.Context.kurs_05_02_cure.Remove(edited);
                 App.Context.SaveChanges();
                 MessageBox.Show("Удаление успешно");
